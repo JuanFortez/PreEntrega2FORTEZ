@@ -9,27 +9,25 @@ let listaCarrito = "";
 let precioTotal = 0;
 const carrito = [];
 
-const ordenarMenorMayor = () => {
-    productos.sort((a, b) => a.precio - b.precio);
-    mostrarListaOrdenada();
-};
+const ordenarAlfabeticamente = productos.sort((a, b) => {
+    if (a.nombre > b.nombre) {
+        return 1;
+    } else if (a.nombre < b.nombre) {
+        return -1;
+    }
+    return 0;
+});
 
-const ordenarMayorMenor = () => {
-    productos.sort((a, b) => b.precio - a.precio);
-    mostrarListaOrdenada();
-};
-
-const mostrarListaOrdenada = () => {
-    const listaOrdenada = productos.map(producto => "- "+producto.nombre+" $"+producto.precio);
-    alert("Lista de precios: \n(Productos mayores a $7000 tienen un descuento de 25%)\n\n"+listaOrdenada.join("\n"));
-};
+const listaOrdenada = productos.map(producto => "- "+producto.nombre+" $"+producto.precio);{
+    alert("Lista de precios:\n"+listaOrdenada.join("\n"));
+}
 
 const comprarProductos = () => {
     let seguirComprando = true;
     let productoCantidad = 0;
 
     while (seguirComprando) {
-        let productoNombre = prompt("¿Qué producto deseas comprar?\n\n" + productos.map(p => `${p.nombre} - $${p.precio}`).join("\n"));
+        let productoNombre = prompt("¿Qué producto deseas comprar?\n(Productos mayores a $7000 tienen un descuento de 25%)\n\n" + productos.map(p => `${p.nombre} - $${p.precio}`).join("\n"));
         productoCantidad = parseInt(prompt("¿Cuántos deseas comprar?"));
 
         while (isNaN(productoCantidad)) {
@@ -37,7 +35,6 @@ const comprarProductos = () => {
             productoCantidad = parseInt(prompt("¿Cuántos deseas comprar?"));
         }
         
-
         const producto = productos.find(p => p.nombre.toLowerCase() === productoNombre.toLowerCase());
 
         if (producto) {
@@ -49,8 +46,6 @@ const comprarProductos = () => {
         seguirComprando = confirm("¿Desea seguir comprando?");
 
     }
-
-
     mostrarCarrito();
 };
 
@@ -95,8 +90,8 @@ const mostrarCarrito = () => {
     alert("Total a pagar: $" + precioTotal);
 };
 
-ordenarMenorMayor();
 comprarProductos();
+ordenarAlfabeticamente();
 
 
 function agradecimiento() {
