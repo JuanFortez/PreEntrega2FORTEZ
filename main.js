@@ -5,6 +5,10 @@ function saludar() {
 
 saludar();
 
+function agradecimiento() {
+    alert('Gracias por tu compra!\nVuelve pronto!');
+}
+
 let listaCarrito = "";
 let precioTotal = 0;
 const carrito = [];
@@ -18,35 +22,58 @@ const ordenarAlfabeticamente = productos.sort((a, b) => {
     return 0;
 });
 
-const listaOrdenada = productos.map(producto => "- "+producto.nombre+" $"+producto.precio);{
+const listaOrdenada = productos.map(producto => "- "+producto.nombre+": $"+producto.precio); {
     alert("Lista de precios:\n"+listaOrdenada.join("\n"));
 }
 
-const comprarProductos = () => {
+
+function comprarProductos () {
     let seguirComprando = true;
     let productoCantidad = 0;
 
     while (seguirComprando) {
-        let productoNombre = prompt("¿Qué producto deseas comprar?\n(Productos mayores a $7000 tienen un descuento de 25%)\n\n" + productos.map(p => `${p.nombre} - $${p.precio}`).join("\n"));
-        productoCantidad = parseInt(prompt("¿Cuántos deseas comprar?"));
+        const filtrarCategoria = prompt("Desea filtrar los productos por categoria? (Sí/No)").toLowerCase(); {
+                if (filtrarCategoria === "sí" || filtrarCategoria === "si") {
+                    const filtrarCategoria = prompt("Ingresa la categoria:\n - pantalon\n - zapatillas\n - campera");
+                    const categoriaFiltrada = productos.filter(producto => producto.categoria === filtrarCategoria);
+                    alert("Lista de productos filtrados por categoria:\n(Productos mayores a $7000 tienen un descuento de 25%)\n\n" + categoriaFiltrada.map(producto => "- "+producto.nombre+": $"+producto.precio).join("\n"));
 
-        while (isNaN(productoCantidad)) {
-            alert("Por favor, ingresa un valor válido");
-            productoCantidad = parseInt(prompt("¿Cuántos deseas comprar?"));
-        }
-        
-        const producto = productos.find(p => p.nombre.toLowerCase() === productoNombre.toLowerCase());
+                    let productoNombre = prompt("¿Qué producto deseas comprar?\n" + categoriaFiltrada.map(producto => `${producto.nombre} - $${producto.precio}`).join("\n"));
+                    productoCantidad = parseInt(prompt("¿Cuántos deseas comprar?"));
 
-        if (producto) {
-            agregarAlCarrito(producto, productoCantidad);
-        } else {
-            alert("No tenemos ese producto");
+                    const producto = productos.find(producto => producto.nombre.toLowerCase() === productoNombre.toLowerCase());
+
+                    if (producto) {
+                        agregarAlCarrito(producto, productoCantidad);
+                    } else {
+                        alert("No tenemos ese producto");
+                    }
+                    
+                } else {
+                    let productoNombre = prompt("¿Qué producto deseas comprar?\n(Productos mayores a $7000 tienen un descuento de 25%)\n\n" + productos.map(producto => "- "+producto.nombre+ ": $"+producto.precio).join("\n"));
+                    productoCantidad = parseInt(prompt("¿Cuántos deseas comprar?"));
+
+                    while (isNaN(productoCantidad)) {
+                        alert("Por favor, ingresa un valor válido");
+                        productoCantidad = parseInt(prompt("¿Cuántos deseas comprar?"));
+                    }
+
+                    const producto = productos.find(producto => producto.nombre.toLowerCase() === productoNombre.toLowerCase());
+
+                    if (producto) {
+                        agregarAlCarrito(producto, productoCantidad);
+                    } else {
+                        alert("No tenemos ese producto");
+                    }
+                }
         }
 
         seguirComprando = confirm("¿Desea seguir comprando?");
-
+        
     }
+
     mostrarCarrito();
+
 };
 
 const agregarAlCarrito = (producto, cantidad) => {
@@ -86,17 +113,16 @@ const mostrarCarrito = () => {
     productosCarritoDescuento.forEach(item => {
         listaCarrito += `- ${item.nombre} x ${item.cantidad} = $${item.precio * item.cantidad}\n`;
     });
+    
     alert(listaCarrito);
     alert("Total a pagar: $" + precioTotal);
+
+    agradecimiento();
+
 };
 
 comprarProductos();
 ordenarAlfabeticamente();
 
 
-function agradecimiento() {
-    alert('Gracias por tu compra!\nVuelve pronto!');
-}
-
-agradecimiento();
 

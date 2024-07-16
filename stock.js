@@ -3,7 +3,7 @@ const productos =
     {
         id: 1,
         nombre: "Zapatillas Nike Jordan",
-        tipo: "zapatillas",
+        categoria: "zapatillas",
         descripcion: "",
         precio: 1200,
         talle: 40,
@@ -13,7 +13,7 @@ const productos =
     {
         id: 2,
         nombre: "Zapatillas Nike Running",
-        tipo: "zapatillas",
+        categoria: "zapatillas",
         descripcion: "",
         precio: 1000,
         talle: 40,
@@ -23,7 +23,7 @@ const productos =
     {
         id: 3,
         nombre: "Zapatillas Nike Basquet",
-        tipo: "zapatillas",
+        categoria: "zapatillas",
         descripcion: "",
         precio: 1500,
         talle: 40,
@@ -33,7 +33,7 @@ const productos =
     {
         id: 4,
         nombre: "Zapatillas Adidas Basquet",
-        tipo: "zapatillas",
+        categoria: "zapatillas",
         descripcion: "",
         precio: 1600,
         talle: 42,
@@ -43,7 +43,7 @@ const productos =
     {
         id: 5,
         nombre: "Zapatillas Adidas Running",
-        tipo: "lentes",
+        categoria: "zapatillas",
         descripcion: "",
         precio: 1800,
         talle: 40,
@@ -53,7 +53,7 @@ const productos =
     {
         id: 6,
         nombre: "Campera Cuero",
-        tipo: "campera",
+        categoria: "campera",
         descripcion: "",
         precio: 12000,
         talle: "L",
@@ -63,7 +63,7 @@ const productos =
     {
         id: 7,
         nombre: "Campera Jean",
-        tipo: "campera",
+        categoria: "campera",
         descripcion: "",
         precio: 11000,
         talle: "L",
@@ -73,7 +73,7 @@ const productos =
     {
         id: 8,
         nombre: "Campera Deportiva",
-        tipo: "campera",
+        categoria: "campera",
         descripcion: "",
         precio: 10000,
         talle: "XL",
@@ -83,7 +83,7 @@ const productos =
     {
         id: 9,
         nombre: "Pantalon Jean",
-        tipo: "pantalon",
+        categoria: "pantalon",
         descripcion: "",
         precio: 7000,
         talle: "L",
@@ -93,7 +93,7 @@ const productos =
     {
         id: 10,
         nombre: "Pantalon Deportivo",
-        tipo: "pantalon",
+        categoria: "pantalon",
         descripcion: "",
         precio: 6000,
         talle: "M",
