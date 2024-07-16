@@ -92,21 +92,11 @@ const agregarAlCarrito = (producto, cantidad) => {
 };
 
 const mostrarCarrito = () => {
-    const productosCarritoDescuento = carrito.map(producto => {
-        if (producto.precio >= 7000){
-            return {
+    const productosCarritoDescuento = carrito.map(producto => ({
                 nombre: producto.nombre,
                 cantidad: producto.cantidad,
-                precio: producto.precio - (producto.precio * 0.25)
-            };
-        } else {
-            return {
-                nombre: producto.nombre,
-                cantidad: producto.cantidad,
-                precio: producto.precio
-            };
-        }
-    });
+                precio: producto.precio >= 7000 ? producto.precio * 0.75 : producto.precio
+    }));
 
     listaCarrito = "Carrito de compras:\n";
     precioTotal = productosCarritoDescuento.reduce((total, item) => total + (item.precio * item.cantidad), 0);
