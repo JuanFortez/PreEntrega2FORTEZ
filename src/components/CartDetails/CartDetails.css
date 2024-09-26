@@ -1,0 +1,7 @@
+.productDCart {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 10px;
+    border: 1px solid rgb(31, 47, 66);
+}

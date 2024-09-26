@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import {
   Box,
   Container,
@@ -13,23 +13,30 @@ import {
   StackDivider,
   useColorModeValue,
 } from "@chakra-ui/react";
-import { MdLocalShipping } from "react-icons/md";
-
+import { CartContext } from "../../context/CartContext";
 export const ItemDetailContainer = ({ product }) => {
   const [showCount, setShowCount] = useState(false);
   const [count, setCount] = useState(0);
+
+  const { addItem, removeItem } = useContext(CartContext);
 
   const handleShowCount = () => {
     setShowCount(!showCount);
   };
 
   const handleIncrement = () => {
-    setCount(count + 1);
+    if (count < product.stock) {
+      const newCount = count + 1;
+      setCount(newCount);
+      addItem(product, newCount);
+    }
   };
 
   const handleDecrement = () => {
     if (count > 0) {
-      setCount(count - 1);
+      const newCount = count - 1;
+      setCount(newCount);
+      removeItem(product);
     }
   };
 
@@ -44,7 +51,7 @@ export const ItemDetailContainer = ({ product }) => {
           <Image
             rounded={"md"}
             alt={"product image"}
-            src={product.images}
+            src={product.thumbnail}
             fit={"cover"}
             align={"center"}
             w={"100%"}
@@ -63,9 +70,9 @@ export const ItemDetailContainer = ({ product }) => {
             <Text
               color={useColorModeValue("gray.900", "gray.400")}
               fontWeight={300}
-              fontSize={"30px"}
+              fontSize={"2xl"}
             >
-              ${product.price}
+              ${product.price} USD
             </Text>
           </Box>
 
@@ -79,7 +86,13 @@ export const ItemDetailContainer = ({ product }) => {
             }
           >
             <VStack spacing={{ base: 4, sm: 6 }}>
-              <Text fontSize={"lg"}>{product.description}</Text>
+              <Text
+                color={useColorModeValue("gray.500", "gray.400")}
+                fontSize={"2xl"}
+                fontWeight={"300"}
+              >
+                {product.description}
+              </Text>
             </VStack>
           </Stack>
 
@@ -98,18 +111,12 @@ export const ItemDetailContainer = ({ product }) => {
             }}
             onClick={handleShowCount}
           >
-            Añadir al carrito
+            Agregar al carrito
           </Button>
-
-          <Stack direction="row" alignItems="center" justifyContent={"center"}>
-            <MdLocalShipping />
-            <Text>{product.shippingInformation}</Text>
-          </Stack>
-
           {showCount && (
             <Stack direction="row" spacing={4} align="center" mt={4}>
               <Button onClick={handleDecrement}>-</Button>
-              <Text fontSize="lg">{count}</Text>
+              <Text margin={0} fontSize="lg">{count}</Text>
               <Button onClick={handleIncrement}>+</Button>
             </Stack>
           )}
