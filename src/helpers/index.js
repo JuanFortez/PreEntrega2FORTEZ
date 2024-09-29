@@ -5,7 +5,6 @@ import { collection, addDoc } from "firebase/firestore";
 
 export async function createProductsFirestore(collectionName) {
   try {
-    // 1. Obtener los productos de la API
     const response = await getAllProducts();
     const fetchedProducts = response.data.products;
 
@@ -13,10 +12,8 @@ export async function createProductsFirestore(collectionName) {
       throw new Error("La respuesta de la API no es un array.");
     }
 
-    // 2. Referencia a la colección en Firestore
     const productsCollection = collection(db, collectionName);
 
-    // 3. Añadir los nuevos productos a Firestore
     const addPromises = fetchedProducts.map((product) => {
       delete product.id;
       addDoc(productsCollection, {

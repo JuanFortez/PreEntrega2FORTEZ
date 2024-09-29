@@ -19,7 +19,7 @@ export const FormPayment = () => {
     nombre: false,
     apellido: false,
     email: false,
-    adress: false,
+    address: false,
     country: false,
     state: false,
     zip: false,
@@ -33,7 +33,7 @@ export const FormPayment = () => {
     nombre: "",
     apellido: "",
     email: "",
-    adress: "",
+    address: "",
     country: "",
     state: "",
     zip: "",
@@ -116,14 +116,14 @@ export const FormPayment = () => {
         <FormControl
           className="form-inputs"
           isRequired
-          isInvalid={isError("adress")}
+          isInvalid={isError("address")}
         >
           <FormLabel>Dirección</FormLabel>
           <input
-            type="adress"
+            type="address"
             placeholder="Dirección"
-            onChange={handleInputChange("adress")}
-            onBlur={handleBlur("adress")}
+            onChange={handleInputChange("address")}
+            onBlur={handleBlur("address")}
           />
           {!isError ? (
             <FormHelperText></FormHelperText>
@@ -137,10 +137,10 @@ export const FormPayment = () => {
         <FormControl className="form-inputs">
           <FormLabel>Dirección 2</FormLabel>
           <input
-            type="adress2"
+            type="address2"
             placeholder="Dirección 2"
-            onChange={handleInputChange("adress2")}
-            onBlur={handleBlur("adress2")}
+            onChange={handleInputChange("address2")}
+            onBlur={handleBlur("address2")}
           />
         </FormControl>
 
@@ -216,14 +216,14 @@ export const FormPayment = () => {
         <Flex flexDirection={"column"} justifyContent={"flex-start"}>
           <Box className="form-check">
             <input type="checkbox" />
-            <label htmlFor="same-adress">
+            <label htmlFor="same-address">
               La dirección de envío es la misma que mi dirección de facturación
             </label>
           </Box>
 
           <Box className="form-check">
-            <input type="checkbox" id="save-info" />
-            <label htmlFor="same-adress">
+            <input type="checkbox" />
+            <label htmlFor="save-info">
               Guardar esta información para la proxima vez
             </label>
           </Box>

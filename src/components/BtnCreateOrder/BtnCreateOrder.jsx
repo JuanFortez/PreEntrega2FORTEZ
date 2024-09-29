@@ -1,5 +1,5 @@
 import { Box, Button } from "@chakra-ui/react";
-import React, { useContext, useState } from "react";
+import React, { useState, useContext } from "react";
 import { CartContext } from "../../context";
 import { db } from "../../firebase";
 import { collection, addDoc } from "firebase/firestore";
@@ -11,6 +11,10 @@ export const BtnCreateOrder = () => {
   const [name, setName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
+  const [address, setAddress] = useState("");
+  const [country, setCountry] = useState("");
+  const [state, setState] = useState("");
+  const [zip, setZip] = useState("");
 
   const total = cartState.reduce(
     (acc, item) => acc + item.price * item.qtyItem,
@@ -23,6 +27,10 @@ export const BtnCreateOrder = () => {
         name: name,
         lastName: lastName,
         email: email,
+        address: address,
+        country: country,
+        state: state,
+        zip: zip,
       },
       items: cartState.map((item) => {
         return {
@@ -43,14 +51,16 @@ export const BtnCreateOrder = () => {
         title: "Your work has been saved:" + id,
         showConfirmButton: false,
         timer: 2000,
+      }).then(() => {
+        window.location.reload();
       });
     });
   };
 
   return (
     <Box>
-      <Button id="checkout-btn" colorScheme="teal" size="lg" onClick={handleCreateOrder}>
-        Crear Orden
+      <Button colorScheme="teal" size="lg" onClick={handleCreateOrder}>
+        Crear orden
       </Button>
     </Box>
   );

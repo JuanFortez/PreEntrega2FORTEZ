@@ -9,7 +9,6 @@ import {
   ButtonGroup,
   Image,
   Text,
-  Center,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
